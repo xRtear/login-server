@@ -1,0 +1,20 @@
+#基于哪个镜像进行构建，无需搭建java环境
+FROM python:3.8.0-alpine
+
+#定义进入容器时默认位置，接下来后续操作的工作位置
+WORKDIR /app
+
+# 将当前目录内容复制到位于 /app 的工作目录下
+COPY . /app
+
+# 安装 requirements.txt 中指定的任何所需包
+RUN pip install --no-cache-dir -r requirements.txt
+
+# 使端口 7999 可供此容器外的环境使用
+EXPOSE 7999
+
+# 定义环境变量
+# ENV NAME World
+
+# 在容器启动时运行 app.py
+CMD ["python", "login_server.py"]
